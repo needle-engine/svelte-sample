@@ -11,7 +11,7 @@ export default defineConfig(async ({ command }) => {
         plugins: [
             basicSsl(),
             useGzip(needleConfig) ? viteCompression({ deleteOriginFile: true }) : null,
-            needlePlugins(command, needleConfig),
+            needlePlugins(command, needleConfig, {}),
             svelte({}),
         ],
         server: {

@@ -1,51 +1,24 @@
 <script lang="ts">
-import { Context, ContextRegistry, GameObject } from "@needle-tools/engine";
-import { CameraSpot } from "./scripts/CameraSpot";
-import { StateManager } from "./scripts/StateManager";
 
-// exposed state - can be bound from outside components
-export let cameraSpots: Array<CameraSpot> = [];
-export let selectedSpot: CameraSpot | null = null;
+    /**
+     * The src can be a remote url to a GLB (or local file)
+    */
+    export let src: string | undefined = undefined;
 
-// internal state - we manage that here
-let context: Context;
-let stateManager: StateManager | null = null;
-
-// wait for the Needle Engine context to be ready (then we have GameObjects, components, ...)
-ContextRegistry.addContextCreatedCallback((_context) => {
-    context = _context.context as Context;
-    cameraSpots = GameObject.findObjectsOfType(CameraSpot);
-    stateManager = GameObject.findObjectOfType(StateManager);
-    
-    stateManager?.addEventListener(StateManager.CameraSpotClickedEvent, (evt: CustomEvent) => {
-        const clickedOn = evt.detail as CameraSpot;
-        if (clickedOn == selectedSpot) {
-            selectedSpot = null;
-        } else {
-            selectedSpot = clickedOn;
-        }
-    });
-});
-
-// react to changes to the selected spot
-let lastSelectedSpot : CameraSpot | null = null;
-$: if (selectedSpot != lastSelectedSpot) {
-    lastSelectedSpot?.deselect();
-    selectedSpot?.select();
-    lastSelectedSpot = selectedSpot;
-}
-
-// example for dispatching a custom event
-/*
-$: {
-    stateManager?.dispatchEvent(new CustomEvent(StateManager.StateChangedEvent, { detail: appState }));
-}
-*/
-
+    /**
+     * Skybox Image can be assigned via a URL e.g. https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/tief_etz_2k.exr
+    */
+    export let skyboxImage: string | undefined = undefined;
+    /**
+     * Environment Image can be assigned via a URL e.g. https://dl.polyhaven.org/file/ph-assets/HDRIs/exr/2k/tief_etz_2k.exr
+    */
+    export let environmentImage: string | undefined = undefined;
 </script>
 
-<needle-engine></needle-engine>
+<!-- find all attributes in the documentation at https://engine.needle.tools/docs/reference/needle-engine-attributes.html-->
+<needle-engine {src} skybox-image="{skyboxImage}" environment-image="{environmentImage}">
+    <slot />
+</needle-engine>
 
 <style>
-
 </style>
