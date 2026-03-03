@@ -4,3 +4,4 @@ src/generated
 include/**/*
 include/poster.webp
 node_modules
+.DS_Store
