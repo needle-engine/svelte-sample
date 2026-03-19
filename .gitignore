@@ -1,6 +1,6 @@
 assets
 dist
-src/generated
+src/generated/meta.json
 include/**/*
 include/poster.webp
 node_modules

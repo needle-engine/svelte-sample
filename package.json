@@ -11,12 +11,12 @@
 	"deploy": "npm run build && npx --yes needle-cloud deploy dist --token"
   },
   "dependencies": {
-	  "@needle-tools/engine": "^4.16.0",
-	  "three": "npm:@needle-tools/three@^0.169.19",
-	  "@needle-tools/samples-scripts": "file:./../../../../modules/needle-engine-samples/package/Runtime/_Shared/SampleScripts~"
+	  "@needle-tools/engine": "4.16.5",
+	  "three": "npm:@needle-tools/three@0.169.19",
+	  "@needle-tools/samples-scripts": "file:../needle-engine-dev/modules/needle-engine-samples/package/Runtime/_Shared/SampleScripts~"
 	},
   "devDependencies": {
-	  "@needle-tools/helper": "^1.11.5",
+	  "@needle-tools/helper": "2.0.0-next.faf57e6",
 	  "@types/three": "0.169.0",
 	  "@vitejs/plugin-basic-ssl": "^1.1.0",
 	  "typescript": "^5.0.2",
